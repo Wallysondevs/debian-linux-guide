@@ -1728,7 +1728,358 @@ export const modules: Module[] = [
   },
 
   // ═══════════════════════════════════════════════════════
-  // PARTE 10 — PREPARAÇÃO PARA A PROVA
+  // PARTE 10 — AUTOAJUDA E DOCUMENTAÇÃO
+  // ═══════════════════════════════════════════════════════
+  {
+    id: "autoajuda-comandos",
+    title: "Autoajuda: --help, man e info",
+    icon: "❓",
+    category: "Autoajuda e Documentação",
+    description: "Aprenda a se ajudar! Use --help, man pages e info para nunca ficar perdido no terminal",
+    content: [
+      "**Você NÃO precisa decorar todos os comandos!** O Linux tem um sistema de autoajuda embutido. Sempre que esquecer como usar um comando, use --help, man ou info. Isso é o que profissionais fazem no dia a dia.",
+      "**--help e -h:** Quase todo comando aceita a flag --help (ou -h em alguns casos). Ela mostra um resumo rápido das opções disponíveis direto no terminal. Exemplo: 'ls --help' mostra todas as flags do ls. 'chmod --help' mostra como usar o chmod. Sempre tente isso primeiro!",
+      "**man (manual pages):** O comando 'man' abre o manual completo de qualquer comando. É mais detalhado que --help. Use as setas para navegar, '/' para buscar texto, e 'q' para sair. Exemplo: 'man ls' abre o manual do ls com TODAS as opções explicadas.",
+      "**Seções do man:** O man é dividido em seções: 1 = comandos de usuário, 5 = formatos de arquivos, 8 = comandos de administração. Às vezes precisa especificar: 'man 5 passwd' (formato do arquivo /etc/passwd) vs 'man 1 passwd' (comando passwd).",
+      "**info:** Alguns comandos GNU têm documentação extra via 'info'. É mais detalhado que o man, com navegação por hyperlinks. Exemplo: 'info coreutils' mostra documentação completa das ferramentas básicas.",
+      "**whatis e apropos:** 'whatis ls' mostra uma descrição curta de uma linha. 'apropos rede' busca todos os comandos relacionados à palavra 'rede'. Útil quando você sabe O QUE quer fazer mas não sabe QUAL comando usar.",
+      "**type e which:** 'type ls' mostra se é um comando interno, alias ou programa. 'which python' mostra o caminho completo do executável. Útil para diagnosticar problemas como 'comando não encontrado'.",
+      "**Dica de ouro para a prova:** Se você esquecer a sintaxe de qualquer comando durante a prova prática, use '--help' primeiro (rápido) e 'man' se precisar de mais detalhes. Ninguém espera que você decore tudo!",
+    ],
+    commands: [
+      {
+        command: "comando --help",
+        description: "Mostra ajuda rápida de qualquer comando. É a primeira coisa que você deve tentar!",
+        example: "ls --help\nchmod --help\ntar --help\nuseradd --help\nsystemctl --help",
+        output: "Usage: ls [OPTION]... [FILE]...\nList information about the FILEs.\n  -a, --all       do not ignore entries starting with .\n  -l              use a long listing format\n  -h, --human-readable  print sizes like 1K 234M 2G\n  ...",
+      },
+      {
+        command: "comando -h",
+        description: "Versão curta do --help (funciona em muitos comandos, mas nem todos)",
+        example: "dnf -h\npython -h\ncurl -h",
+      },
+      {
+        command: "man comando",
+        description: "Abre o manual completo do comando. Navegue com setas, busque com /, saia com q",
+        example: "man ls\nman chmod\nman tar\nman ssh\nman 5 passwd",
+        output: "# Navegação dentro do man:\n# Setas = rolar | / = buscar | n = próxima ocorrência | q = sair\n# Exemplo: /recursive busca a palavra 'recursive' no manual",
+      },
+      {
+        command: "info comando",
+        description: "Documentação GNU extendida com navegação por hyperlinks",
+        example: "info coreutils\ninfo bash",
+      },
+      {
+        command: "whatis comando",
+        description: "Mostra uma descrição de uma linha sobre o que o comando faz",
+        example: "whatis ls\nwhatis chmod\nwhatis grep",
+        output: "ls (1)   - list directory contents\nchmod (1) - change file mode bits\ngrep (1)  - print lines that match patterns",
+      },
+      {
+        command: "apropos palavra",
+        description: "Busca todos os comandos relacionados a uma palavra-chave (não sabe o nome? use isso!)",
+        example: "apropos compress\napropos network\napropos user\napropos disk",
+        output: "# Exemplo: apropos compress\nbzip2 (1)  - a block-sorting file compressor\ngzip (1)   - compress or expand files\ntar (1)    - an archiving utility\nxz (1)     - Compress or decompress .xz files",
+      },
+      {
+        command: "type comando",
+        description: "Mostra o tipo do comando: builtin (interno), alias, arquivo ou função",
+        example: "type ls\ntype cd\ntype python",
+        output: "ls is aliased to 'ls --color=auto'\ncd is a shell builtin\npython is /usr/bin/python",
+      },
+      {
+        command: "which comando",
+        description: "Mostra o caminho completo do executável de um comando",
+        example: "which bash\nwhich python\nwhich vim",
+        output: "/usr/bin/bash\n/usr/bin/python\n/usr/bin/vim",
+      },
+    ],
+    exercises: [
+      { id: 1, question: "Você esqueceu as flags do comando 'tar'. Como ver rapidamente as opções?", answer: "tar --help (ou man tar para o manual completo)", hint: "Sempre tente --help primeiro, é mais rápido" },
+      { id: 2, question: "Como abrir o manual completo do comando 'chmod'?", answer: "man chmod" },
+      { id: 3, question: "Dentro do man, como buscar a palavra 'recursive'?", answer: "Pressione / e digite recursive, depois Enter. Use 'n' para próxima ocorrência" },
+      { id: 4, question: "Como sair do man?", answer: "Pressione q" },
+      { id: 5, question: "Você quer comprimir um arquivo mas não lembra qual comando usar. Como buscar?", answer: "apropos compress (mostra todos os comandos relacionados a compressão)" },
+      { id: 6, question: "Como saber se 'ls' é um comando, alias ou builtin?", answer: "type ls (resposta: ls is aliased to 'ls --color=auto')" },
+      { id: 7, question: "Qual a diferença entre --help e man?", answer: "--help é um resumo rápido direto no terminal. man é o manual completo com exemplos e explicações detalhadas." },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════
+  // PARTE 11 — ACESSO REMOTO E SSH
+  // ═══════════════════════════════════════════════════════
+  {
+    id: "ssh-conexao",
+    title: "SSH: Conexão Remota Segura",
+    icon: "🔐",
+    category: "Acesso Remoto e SSH",
+    description: "Conecte-se a outros computadores, transfira arquivos e administre servidores remotamente",
+    content: [
+      "**O que é SSH?** SSH (Secure Shell) é um protocolo que permite acessar o terminal de outro computador pela rede, de forma criptografada. É a ferramenta #1 para administrar servidores Linux remotamente. A porta padrão é a 22.",
+      "**Como funciona:** Você (cliente) conecta a outro computador (servidor) usando: 'ssh usuario@ip_do_servidor'. O servidor precisa ter o serviço 'sshd' rodando. Após autenticar (senha ou chave), você recebe um terminal remoto — tudo que digitar é executado no servidor, não no seu computador!",
+      "**Descobrindo seu IP:** Use 'ip addr' para ver seu IP local (rede interna, ex: 192.168.1.100). Para ver seu IP público (internet), use 'curl ifconfig.me' ou 'curl icanhazip.com'. O IP local é para conexões na mesma rede. O IP público é para conexões pela internet.",
+      "**Verificando se o SSH está rodando:** Use 'systemctl status sshd'. Se não estiver ativo, inicie com 'sudo systemctl start sshd'. Para iniciar automaticamente no boot: 'sudo systemctl enable sshd'. Se o sshd não estiver instalado: 'sudo dnf install openssh-server'.",
+      "**Verificando portas:** Use 'ss -tulnp | grep :22' para ver se a porta 22 está aberta e escutando. Se precisar mudar a porta do SSH, edite '/etc/ssh/sshd_config' e altere a linha 'Port 22' para outra porta (ex: Port 2222).",
+      "**Liberando SSH no firewall:** O firewall do Fedora pode bloquear conexões SSH! Libere com: 'sudo firewall-cmd --add-service=ssh --permanent' seguido de 'sudo firewall-cmd --reload'. Sem isso, ninguém consegue conectar mesmo com o sshd rodando.",
+      "**Cenário prático — VirtualBox:** Se você tem Windows com VirtualBox rodando Fedora, configure a rede da VM como 'Bridge Adapter' (ponte) para que a VM receba um IP na mesma rede do Windows. Depois, no Windows, use PuTTY para conectar via SSH ao IP da VM.",
+    ],
+    commands: [
+      {
+        command: "ssh usuario@ip",
+        description: "Conecta ao terminal remoto de outro computador via SSH",
+        example: "ssh aluno@192.168.1.100\nssh root@10.0.0.5\nssh -p 2222 admin@servidor.com",
+        output: "# Na primeira conexão aparece:\nThe authenticity of host '192.168.1.100' can't be established.\nAre you sure you want to continue connecting? yes\n# Digite a senha do usuário remoto\naluno@192.168.1.100's password: ****\n# Agora você está no terminal remoto!\n[aluno@servidor ~]$",
+        flags: [
+          { flag: "-p porta", description: "Conecta em porta diferente da 22 (ex: ssh -p 2222 user@ip)" },
+          { flag: "-v", description: "Modo verboso — mostra detalhes da conexão (útil para debug)" },
+        ],
+      },
+      {
+        command: "ip addr",
+        description: "Mostra seu IP local (rede interna). Procure o IP na interface 'eth0' ou 'wlp*' ou 'enp*'",
+        example: "ip addr show\nip addr | grep inet",
+        output: "# Procure linhas como:\ninet 192.168.1.100/24  ← este é seu IP local\ninet 10.0.2.15/24  ← IP se estiver numa VM (NAT)",
+      },
+      {
+        command: "curl ifconfig.me",
+        description: "Mostra seu IP público (endereço na internet, visível externamente)",
+        example: "curl ifconfig.me\ncurl icanhazip.com\ncurl ipinfo.io",
+        output: "200.150.30.45",
+      },
+      {
+        command: "sudo systemctl status sshd",
+        description: "Verifica se o servidor SSH está rodando no seu computador",
+        example: "sudo systemctl status sshd\nsudo systemctl start sshd\nsudo systemctl enable sshd",
+        output: "● sshd.service - OpenSSH server daemon\n   Loaded: loaded\n   Active: active (running) ← SSH está rodando!\n   # Se aparecer 'inactive (dead)', inicie com: sudo systemctl start sshd",
+      },
+      {
+        command: "sudo dnf install openssh-server",
+        description: "Instala o servidor SSH (necessário para receber conexões remotas)",
+        example: "sudo dnf install openssh-server\nsudo systemctl start sshd\nsudo systemctl enable sshd",
+      },
+      {
+        command: "ss -tulnp | grep :22",
+        description: "Verifica se a porta 22 (SSH) está aberta e escutando conexões",
+        example: "ss -tulnp | grep :22\nss -tulnp | grep ssh",
+        output: "tcp  LISTEN  0  128  0.0.0.0:22  0.0.0.0:*  users:((\"sshd\",pid=1234,fd=3))",
+      },
+      {
+        command: "sudo firewall-cmd --add-service=ssh --permanent",
+        description: "Libera SSH no firewall do Fedora (ESSENCIAL! sem isso ninguém conecta)",
+        example: "sudo firewall-cmd --add-service=ssh --permanent\nsudo firewall-cmd --reload\nsudo firewall-cmd --list-all",
+      },
+      {
+        command: "scp arquivo usuario@ip:/caminho/",
+        description: "Copia arquivos entre computadores via SSH (Secure Copy)",
+        example: "scp trabalho.pdf aluno@192.168.1.100:/home/aluno/\nscp aluno@192.168.1.100:/tmp/resultado.txt .\nscp -r pasta/ aluno@192.168.1.100:/home/aluno/",
+        flags: [
+          { flag: "-r", description: "Copia diretórios recursivamente" },
+          { flag: "-P porta", description: "Porta SSH alternativa (ex: scp -P 2222)" },
+        ],
+      },
+    ],
+    exercises: [
+      { id: 1, question: "Como conectar via SSH ao computador 192.168.1.50 com o usuário 'estudante'?", answer: "ssh estudante@192.168.1.50" },
+      { id: 2, question: "O SSH não está rodando no seu Fedora. Quais 3 comandos você precisa executar?", answer: "sudo dnf install openssh-server && sudo systemctl start sshd && sudo systemctl enable sshd", hint: "Instalar, iniciar e habilitar no boot" },
+      { id: 3, question: "Como ver seu IP local?", answer: "ip addr (procure 'inet 192.168.x.x' na interface de rede)" },
+      { id: 4, question: "Como ver seu IP público (internet)?", answer: "curl ifconfig.me (ou curl icanhazip.com)" },
+      { id: 5, question: "Você liberou o SSH mas ninguém consegue conectar. O que pode estar bloqueando?", answer: "O firewall! Execute: sudo firewall-cmd --add-service=ssh --permanent && sudo firewall-cmd --reload" },
+      { id: 6, question: "Como verificar se a porta 22 está aberta e escutando?", answer: "ss -tulnp | grep :22" },
+      { id: 7, question: "Como copiar o arquivo 'relatorio.pdf' para o servidor 192.168.1.10 na pasta /tmp/?", answer: "scp relatorio.pdf usuario@192.168.1.10:/tmp/" },
+    ],
+  },
+  {
+    id: "ssh-chaves",
+    title: "Chaves SSH e Autenticação Segura",
+    icon: "🔑",
+    category: "Acesso Remoto e SSH",
+    description: "Gere chaves SSH, configure login sem senha e proteja seu acesso remoto",
+    content: [
+      "**Por que usar chaves SSH?** Autenticação por senha é vulnerável a ataques de força bruta. Chaves SSH são MUITO mais seguras: usam criptografia assimétrica (chave pública + chave privada). A chave privada fica com VOCÊ (nunca compartilhe!). A chave pública vai para o servidor.",
+      "**Como funciona:** 1) Você gera um par de chaves no seu computador (ssh-keygen). 2) Copia a chave pública para o servidor (ssh-copy-id). 3) Agora você conecta SEM digitar senha — a autenticação é feita pela chave. O servidor verifica se você tem a chave privada correspondente.",
+      "**Gerando chaves:** Execute 'ssh-keygen -t ed25519' (algoritmo moderno e seguro) ou 'ssh-keygen -t rsa -b 4096' (compatível com sistemas mais antigos). Ele pergunta onde salvar (~/.ssh/id_ed25519 por padrão) e pede uma passphrase (senha da chave — recomendado para segurança extra).",
+      "**Copiando a chave para o servidor:** Use 'ssh-copy-id usuario@ip'. Isso copia sua chave pública para ~/.ssh/authorized_keys no servidor. A partir de agora, 'ssh usuario@ip' conecta sem pedir senha!",
+      "**Arquivos importantes:** ~/.ssh/id_ed25519 = chave privada (NUNCA compartilhe!). ~/.ssh/id_ed25519.pub = chave pública (essa você envia para servidores). ~/.ssh/authorized_keys = chaves públicas autorizadas a conectar (no servidor). ~/.ssh/known_hosts = fingerprints de servidores que você já conectou.",
+      "**Desabilitando login por senha (servidor seguro):** Edite /etc/ssh/sshd_config e altere: 'PasswordAuthentication no'. Depois: 'sudo systemctl restart sshd'. ATENÇÃO: faça isso SOMENTE depois de confirmar que a chave funciona, senão você perde acesso!",
+    ],
+    commands: [
+      {
+        command: "ssh-keygen -t ed25519",
+        description: "Gera um par de chaves SSH (ed25519 é o algoritmo mais moderno e seguro)",
+        example: "ssh-keygen -t ed25519\nssh-keygen -t ed25519 -C \"email@aluno.edu.br\"",
+        output: "Generating public/private ed25519 key pair.\nEnter file in which to save the key (/home/aluno/.ssh/id_ed25519): [Enter]\nEnter passphrase (empty for no passphrase): [digite uma senha ou Enter]\n# Chaves criadas em:\n# ~/.ssh/id_ed25519 (PRIVADA — nunca compartilhe!)\n# ~/.ssh/id_ed25519.pub (PÚBLICA — envie para servidores)",
+      },
+      {
+        command: "ssh-keygen -t rsa -b 4096",
+        description: "Gera chaves RSA com 4096 bits (para compatibilidade com sistemas mais antigos)",
+        example: "ssh-keygen -t rsa -b 4096",
+      },
+      {
+        command: "ssh-copy-id usuario@ip",
+        description: "Copia sua chave pública para o servidor (configura login sem senha)",
+        example: "ssh-copy-id aluno@192.168.1.100\nssh-copy-id -p 2222 admin@servidor.com",
+        output: "# Após executar, tente conectar:\nssh aluno@192.168.1.100\n# Deve conectar SEM pedir senha!",
+      },
+      {
+        command: "cat ~/.ssh/id_ed25519.pub",
+        description: "Mostra sua chave pública (para copiar manualmente para servidores ou GitHub)",
+        example: "cat ~/.ssh/id_ed25519.pub",
+        output: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... aluno@fedora",
+      },
+      {
+        command: "ls -la ~/.ssh/",
+        description: "Lista os arquivos de chaves e configuração SSH",
+        example: "ls -la ~/.ssh/",
+        output: "-rw-------  id_ed25519          ← chave privada (permissão 600!)\n-rw-r--r--  id_ed25519.pub      ← chave pública\n-rw-r--r--  known_hosts          ← servidores conhecidos\n-rw-------  authorized_keys      ← chaves autorizadas (no servidor)",
+      },
+      {
+        command: "eval $(ssh-agent) && ssh-add",
+        description: "Inicia o agente SSH e adiciona sua chave (evita digitar a passphrase repetidamente)",
+        example: "eval $(ssh-agent -s)\nssh-add ~/.ssh/id_ed25519",
+      },
+    ],
+    exercises: [
+      { id: 1, question: "Qual comando gera um par de chaves SSH com algoritmo moderno?", answer: "ssh-keygen -t ed25519" },
+      { id: 2, question: "Onde fica a chave privada gerada por padrão?", answer: "~/.ssh/id_ed25519 (nunca compartilhe este arquivo!)" },
+      { id: 3, question: "Como copiar sua chave pública para o servidor 192.168.1.50?", answer: "ssh-copy-id usuario@192.168.1.50" },
+      { id: 4, question: "Após configurar a chave, como verificar se funciona?", answer: "ssh usuario@192.168.1.50 (deve conectar sem pedir senha)" },
+      { id: 5, question: "Qual permissão a chave privada deve ter?", answer: "600 (chmod 600 ~/.ssh/id_ed25519) — só o dono pode ler/escrever" },
+      { id: 6, question: "Como ver sua chave pública para copiar para o GitHub?", answer: "cat ~/.ssh/id_ed25519.pub" },
+    ],
+  },
+  {
+    id: "acesso-remoto-windows",
+    title: "Acesso Remoto: Windows ↔ Linux",
+    icon: "🖥️",
+    category: "Acesso Remoto e SSH",
+    description: "PuTTY, área de trabalho remota, VirtualBox e compartilhamento de tela entre Windows e Linux",
+    content: [
+      "**Cenário comum do aluno:** Você tem Windows no seu notebook e roda o Fedora Linux em uma máquina virtual (VirtualBox). Quer acessar o terminal ou a área de trabalho do Fedora sem ficar alternando janelas. Existem várias formas de fazer isso!",
+      "**Opção 1 — SSH via PuTTY (terminal apenas):** No Windows, baixe o PuTTY (putty.org). Configure: Host = IP da VM Linux, Port = 22, Connection Type = SSH. Clique Open. Agora você tem um terminal do Linux dentro do Windows! Precisa que o sshd esteja rodando no Linux.",
+      "**Opção 2 — SSH nativo do Windows 10/11:** O Windows moderno já tem SSH! Abra PowerShell ou CMD e digite: 'ssh usuario@ip_da_vm'. Funciona igual ao Linux. Não precisa do PuTTY se tem Windows 10+.",
+      "**Opção 3 — Área de trabalho remota (xrdp):** Para acessar a interface gráfica completa do Linux pelo Windows, instale o xrdp no Linux. Ele permite usar a ferramenta 'Conexão de Área de Trabalho Remota' do Windows (mstsc.exe) para conectar ao desktop do Linux.",
+      "**Configurando xrdp no Fedora:** 1) 'sudo dnf install xrdp'. 2) 'sudo systemctl start xrdp'. 3) 'sudo systemctl enable xrdp'. 4) Libere no firewall: 'sudo firewall-cmd --add-port=3389/tcp --permanent && sudo firewall-cmd --reload'. 5) No Windows: Abra 'Conexão de Área de Trabalho Remota', digite o IP do Linux e conecte.",
+      "**Opção 4 — VNC (Virtual Network Computing):** Outra forma de compartilhar a tela. Instale 'tigervnc-server' no Linux. No Windows, use um cliente VNC (RealVNC, TightVNC). A porta padrão é 5901.",
+      "**Configuração de rede no VirtualBox:** Para que o Windows acesse a VM, a rede da VM deve ser 'Bridged Adapter' (ponte) — assim a VM recebe um IP na mesma rede do Windows. Se usar NAT, configure 'Port Forwarding' no VirtualBox: Host Port 2222 → Guest Port 22, depois conecte via 'ssh -p 2222 usuario@127.0.0.1'.",
+      "**IMPORTANTE — Xorg vs Wayland:** O xrdp funciona melhor com Xorg (X11). Se seu Fedora usa GNOME com Wayland (padrão), na tela de login clique no ícone de engrenagem e selecione 'GNOME on Xorg' antes de conectar via xrdp. O Wayland não suporta bem compartilhamento de tela via xrdp.",
+    ],
+    commands: [
+      {
+        command: "sudo dnf install xrdp",
+        description: "Instala o servidor de desktop remoto (permite acesso gráfico via Windows)",
+        example: "sudo dnf install xrdp\nsudo systemctl start xrdp\nsudo systemctl enable xrdp",
+      },
+      {
+        command: "sudo firewall-cmd --add-port=3389/tcp --permanent",
+        description: "Libera a porta do desktop remoto (RDP) no firewall",
+        example: "sudo firewall-cmd --add-port=3389/tcp --permanent\nsudo firewall-cmd --reload",
+      },
+      {
+        command: "sudo dnf install tigervnc-server",
+        description: "Instala o servidor VNC para compartilhamento de tela",
+        example: "sudo dnf install tigervnc-server\nvncpasswd\nvncserver :1",
+        output: "# vncpasswd = define a senha de acesso VNC\n# vncserver :1 = inicia na porta 5901\n# No Windows: use RealVNC Viewer e conecte em ip:5901",
+      },
+      {
+        command: "vncpasswd",
+        description: "Define a senha para acesso VNC (executar antes de iniciar o servidor)",
+        example: "vncpasswd",
+        output: "Password: ****\nVerify: ****\nWould you like to enter a view-only password? n",
+      },
+      {
+        command: "ssh -p 2222 usuario@127.0.0.1",
+        description: "Conecta via SSH com port forwarding do VirtualBox (NAT)",
+        example: "# No VirtualBox: Settings → Network → Advanced → Port Forwarding\n# Host Port: 2222, Guest Port: 22\n# Depois no Windows:\nssh -p 2222 usuario@127.0.0.1",
+      },
+      {
+        command: "ip addr | grep 'inet '",
+        description: "Descubra o IP da VM Linux para conectar pelo Windows",
+        example: "ip addr | grep 'inet '\nhostname -I",
+        output: "inet 127.0.0.1/8 scope host lo\ninet 192.168.1.105/24 brd 192.168.1.255  ← USE ESTE IP!",
+      },
+    ],
+    exercises: [
+      { id: 1, question: "Você tem Windows e quer acessar o terminal do Fedora na VM. Qual ferramenta usar?", answer: "PuTTY (ou SSH nativo do Windows 10+: 'ssh usuario@ip' no PowerShell)" },
+      { id: 2, question: "Para acessar a área de trabalho GRÁFICA do Linux pelo Windows, o que instalar no Linux?", answer: "xrdp (sudo dnf install xrdp) e usar 'Conexão de Área de Trabalho Remota' no Windows" },
+      { id: 3, question: "A VM VirtualBox usa NAT. Como configurar SSH?", answer: "Port Forwarding: Host 2222 → Guest 22. Conecte com: ssh -p 2222 usuario@127.0.0.1" },
+      { id: 4, question: "Qual tipo de rede no VirtualBox permite acesso direto pelo IP?", answer: "Bridged Adapter (ponte) — a VM recebe IP na mesma rede do host" },
+      { id: 5, question: "O xrdp não funciona direito. O que verificar?", answer: "Verificar se está usando GNOME on Xorg (não Wayland) na tela de login, e se a porta 3389 está liberada no firewall" },
+      { id: 6, question: "Qual a porta padrão do SSH? E do RDP (xrdp)? E do VNC?", answer: "SSH = 22, RDP = 3389, VNC = 5901" },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════
+  // PARTE 12 — INTERFACES GRÁFICAS
+  // ═══════════════════════════════════════════════════════
+  {
+    id: "interfaces-graficas",
+    title: "Interfaces Gráficas: Leves e Pesadas",
+    icon: "🎨",
+    category: "Interfaces Gráficas",
+    description: "Instale ambientes de desktop: XFCE para servidores, KDE para desktop, e mais opções",
+    content: [
+      "**Por que trocar de interface?** O GNOME padrão do Fedora Workstation é bonito mas pesado (~800MB RAM). Em servidores ou máquinas fracas, você pode instalar interfaces mais leves. Cada uma tem diferente consumo de memória e CPU.",
+      "**Ranking por peso (leve → pesado):** 1) Sem interface (apenas terminal) — 0 MB extra, ideal para servidores. 2) i3wm / Sway — ~50MB, tiling WM, teclado puro, para usuários avançados. 3) LXQt — ~150MB, ultra-leve, visual básico. 4) XFCE — ~300MB, leve e funcional, RECOMENDADO para servidores/VMs. 5) MATE — ~400MB, visual tradicional (tipo GNOME 2). 6) Cinnamon — ~500MB, visual moderno (tipo Windows). 7) KDE Plasma — ~600MB, muito customizável e bonito. 8) GNOME — ~800MB, padrão do Fedora Workstation.",
+      "**XFCE — A escolha para servidores:** Se você precisa de interface gráfica em um servidor ou VM com pouca RAM (1-2GB), o XFCE é a melhor opção. É leve, estável e funcional. Tem gerenciador de arquivos (Thunar), terminal, painel e tudo que precisa.",
+      "**Instalando interfaces no Fedora:** Use os grupos do DNF. Cada ambiente é um 'group' que instala todos os pacotes necessários. Após instalar, escolha o ambiente na tela de login (ícone de engrenagem).",
+      "**Xorg vs Wayland:** Xorg (X11) é o protocolo de exibição mais antigo e compatível. Wayland é o novo e mais seguro. GNOME e KDE suportam Wayland. XFCE, MATE e LXQt ainda usam Xorg. Para acesso remoto (xrdp/VNC), Xorg é mais compatível.",
+      "**Rodando sem interface (modo texto):** Em servidores, use 'sudo systemctl set-default multi-user.target' para iniciar sempre no terminal. Para voltar ao modo gráfico: 'sudo systemctl set-default graphical.target'. Isso economiza RAM e CPU.",
+    ],
+    commands: [
+      {
+        command: "sudo dnf install @xfce-desktop-environment",
+        description: "Instala o XFCE — leve e ideal para servidores e VMs (recomendado: ~300MB RAM)",
+        example: "sudo dnf install @xfce-desktop-environment",
+      },
+      {
+        command: "sudo dnf install @kde-desktop-environment",
+        description: "Instala o KDE Plasma — bonito e customizável (~600MB RAM)",
+        example: "sudo dnf install @kde-desktop-environment",
+      },
+      {
+        command: "sudo dnf install @lxqt-desktop-environment",
+        description: "Instala o LXQt — ultra-leve (~150MB RAM), visual básico mas funcional",
+        example: "sudo dnf install @lxqt-desktop-environment",
+      },
+      {
+        command: "sudo dnf install @mate-desktop-environment",
+        description: "Instala o MATE — visual clássico tipo GNOME 2 (~400MB RAM)",
+        example: "sudo dnf install @mate-desktop-environment",
+      },
+      {
+        command: "sudo dnf install @cinnamon-desktop-environment",
+        description: "Instala o Cinnamon — visual parecido com Windows (~500MB RAM)",
+        example: "sudo dnf install @cinnamon-desktop-environment",
+      },
+      {
+        command: "sudo systemctl set-default multi-user.target",
+        description: "Configura o sistema para iniciar no TERMINAL (sem interface gráfica) — ideal para servidores",
+        example: "sudo systemctl set-default multi-user.target\n# Para voltar ao modo gráfico:\nsudo systemctl set-default graphical.target",
+        output: "# multi-user.target = modo texto (servidor)\n# graphical.target = modo gráfico (desktop)\n# Para saber o modo atual:\nsystemctl get-default",
+      },
+      {
+        command: "sudo systemctl set-default graphical.target",
+        description: "Configura o sistema para iniciar com interface gráfica (padrão em desktops)",
+        example: "sudo systemctl set-default graphical.target",
+      },
+      {
+        command: "dnf group list",
+        description: "Lista todos os grupos de pacotes disponíveis (inclui ambientes de desktop)",
+        example: "dnf group list --available | grep -i desktop",
+      },
+    ],
+    exercises: [
+      { id: 1, question: "Qual interface gráfica é recomendada para servidores com pouca RAM?", answer: "XFCE (~300MB RAM) — instale com: sudo dnf install @xfce-desktop-environment" },
+      { id: 2, question: "Como iniciar o sistema sempre no modo texto (sem interface gráfica)?", answer: "sudo systemctl set-default multi-user.target" },
+      { id: 3, question: "Como voltar ao modo gráfico?", answer: "sudo systemctl set-default graphical.target" },
+      { id: 4, question: "Após instalar um novo desktop, onde você escolhe qual usar?", answer: "Na tela de login, clique no ícone de engrenagem e selecione o ambiente desejado" },
+      { id: 5, question: "Qual é a interface mais leve: LXQt, XFCE ou KDE?", answer: "LXQt (~150MB RAM), seguido por XFCE (~300MB), depois KDE (~600MB)" },
+      { id: 6, question: "Para acesso remoto via xrdp, é melhor usar Xorg ou Wayland?", answer: "Xorg (X11) — mais compatível com xrdp e VNC" },
+    ],
+  },
+
+  // ═══════════════════════════════════════════════════════
+  // PARTE 13 — PREPARAÇÃO PARA A PROVA
   // ═══════════════════════════════════════════════════════
   {
     id: "revisao-prova",
@@ -1777,14 +2128,19 @@ export const modules: Module[] = [
         example: "ps aux | grep firefox\nkill -9 1234\ndf -h\nfree -h",
       },
       {
-        command: "Resumo: Rede",
-        description: "ip addr | ping -c 4 | ss -tulnp | nmcli | curl | wget",
-        example: "ip addr\nping -c 4 google.com\nss -tulnp\nnmcli device wifi list",
+        command: "Resumo: Autoajuda",
+        description: "comando --help | man comando | apropos palavra | whatis | type | which",
+        example: "tar --help\nman chmod\napropos compress\nwhatis ls",
       },
       {
-        command: "Resumo: Serviços",
-        description: "systemctl status/start/stop/enable/disable | journalctl -u | systemctl get-default",
-        example: "systemctl status sshd\nsudo systemctl enable sshd\njournalctl -u sshd -f",
+        command: "Resumo: SSH e Acesso Remoto",
+        description: "ssh user@ip | ssh-keygen | ssh-copy-id | scp | ss -tulnp | xrdp | PuTTY",
+        example: "ssh aluno@192.168.1.100\nssh-keygen -t ed25519\nssh-copy-id user@ip\ncurl ifconfig.me",
+      },
+      {
+        command: "Resumo: Interfaces Gráficas",
+        description: "XFCE (leve) | KDE (bonito) | LXQt (ultra-leve) | multi-user.target | graphical.target",
+        example: "sudo dnf install @xfce-desktop-environment\nsudo systemctl set-default multi-user.target",
       },
     ],
     exercises: [
@@ -1792,7 +2148,7 @@ export const modules: Module[] = [
       { id: 2, question: "Liste as 4 edições principais do Fedora e para que servem", answer: "Workstation (desktop/GNOME), Server (servidores), CoreOS (containers), IoT (dispositivos embarcados)" },
       { id: 3, question: "Como listar todos os arquivos (incluindo ocultos) com permissões e tamanhos legíveis?", answer: "ls -lah" },
       { id: 4, question: "Qual comando instala o pacote 'vim' no Fedora?", answer: "sudo dnf install vim" },
-      { id: 5, question: "Como verificar o IP do computador?", answer: "ip addr" },
+      { id: 5, question: "Como verificar o IP do computador?", answer: "ip addr (local) ou curl ifconfig.me (público)" },
       { id: 6, question: "Qual permissão numérica é: dono lê/escreve/executa, grupo lê/executa, outros lê/executa?", answer: "755" },
       { id: 7, question: "Como ver os processos em execução?", answer: "ps aux" },
       { id: 8, question: "Como forçar o encerramento do processo PID 1234?", answer: "kill -9 1234" },
@@ -1801,8 +2157,11 @@ export const modules: Module[] = [
       { id: 11, question: "Qual filesystem o Fedora usa por padrão?", answer: "Btrfs" },
       { id: 12, question: "O que é o SELinux e quais seus 3 modos?", answer: "Módulo de segurança do kernel. Modos: Enforcing (bloqueia), Permissive (alerta), Disabled (desativado)." },
       { id: 13, question: "Como testar a conexão com google.com enviando 5 pacotes?", answer: "ping -c 5 google.com" },
-      { id: 14, question: "Como buscar a palavra 'error' em todos os arquivos de /var/log/ ignorando maiúsculas?", answer: "grep -ri 'error' /var/log/" },
+      { id: 14, question: "Você esqueceu as flags do tar. O que fazer?", answer: "tar --help (rápido) ou man tar (manual completo)" },
       { id: 15, question: "Como compactar a pasta 'trabalho' em 'trabalho.tar.gz'?", answer: "tar -czf trabalho.tar.gz trabalho/" },
+      { id: 16, question: "Como gerar chaves SSH?", answer: "ssh-keygen -t ed25519" },
+      { id: 17, question: "Qual interface gráfica é ideal para servidores com pouca RAM?", answer: "XFCE (~300MB RAM)" },
+      { id: 18, question: "Como acessar a área de trabalho do Linux pelo Windows?", answer: "Instale xrdp no Linux (sudo dnf install xrdp) e use 'Conexão de Área de Trabalho Remota' no Windows" },
     ],
   },
 ];
